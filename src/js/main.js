@@ -1,5 +1,10 @@
 import data from "./data.json";
 
-for (let object of data) {
-  console.log(object.name);
-}
+const inputEl = document.querySelector("#floatingInputGroup1");
+console.log(inputEl);
+
+inputEl.focus();
+
+// for (let object of data) {
+//   console.log(object.name);
+// }

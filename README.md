@@ -1,18 +1,19 @@
 revise async vs defer
-ec, gec, memory and heap, creation & execution phase
+ec, gec, memory and code, creation & execution phase
+callstack: tracks the order of execution contexts
 
-node, deno, bun: to run js outside the browser
+node, deno, (bun): to run js outside the browser (JavaScript Runtime)
 
 node main.js
 
-npm init -y
+npm init -y : to generate a package.json file
 npx live-server
 npx gitignore node
 
-nodemon
+nodemon: auto restart on file changes
 
 npm install --save-dev nodemon
-package.json "start", "dev"
+package.json scripts, run run "start", "dev"
 
 node_modules do not track
 
