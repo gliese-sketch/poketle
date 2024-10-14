@@ -35,3 +35,10 @@ component ko copy paste
 Utility Classes
 Copy karte toh bhot saara code aajata
 Customize kaafi karna padta hai
+
+---
+
+attribute `"[data-pokemon-row]"`
+el.appendChild()
+const p = doc.createElement('p')
+p.classList.add('col')
