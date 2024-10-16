@@ -4,11 +4,11 @@ import Fuse from "fuse.js";
 import data from "./data.json";
 import PokemonCard from "./components/PokemonCard";
 
-// === DOM Selection
+// DOM Selection
 const inputEl = document.querySelector("input");
 const pokemonRow = document.querySelector("[data-pokemon-row]");
 
-// === Render
+// Render
 function renderPokemons(list) {
   // Empty the previous content
   pokemonRow.innerHTML = "";
@@ -20,10 +20,17 @@ function renderPokemons(list) {
   });
 }
 
+// Filtering
 function renderFilterPokemons(input) {
-  const filteredPokemons = data.filter((obj) =>
-    obj.name.toLowerCase().includes(input)
-  );
+  // const filteredPokemons = data.filter((obj) =>
+  //   obj.name.toLowerCase().includes(input)
+  // );
+
+  const fuse = new Fuse(data, {
+    keys: ["name"],
+  });
+
+  const filteredPokemons = fuse.search(input).map((obj) => obj.item);
 
   // Fallback Pokemon Card
   if (!filteredPokemons.length) {
@@ -43,7 +50,7 @@ function renderFilterPokemons(input) {
   renderPokemons(filteredPokemons);
 }
 
-// Filtering
+// Listen for input
 inputEl.addEventListener("input", (e) => {
   const currentInput = e.target.value.toLowerCase().trim();
   renderFilterPokemons(currentInput);
