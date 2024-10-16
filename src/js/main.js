@@ -1,4 +1,5 @@
 import { shuffle } from "fast-shuffle";
+import Fuse from "fuse.js";
 
 import data from "./data.json";
 import PokemonCard from "./components/PokemonCard";
@@ -18,14 +19,10 @@ function renderPokemons(list) {
     pokemonRow.appendChild(pokemon);
   });
 }
-// git commit -m "short message" -m "Long message"
 
-// Filtering
-inputEl.addEventListener("input", (e) => {
-  const currentInput = e.target.value.toLowerCase().trim();
-
+function renderFilterPokemons(input) {
   const filteredPokemons = data.filter((obj) =>
-    obj.name.toLowerCase().includes(currentInput)
+    obj.name.toLowerCase().includes(input)
   );
 
   // Fallback Pokemon Card
@@ -44,6 +41,12 @@ inputEl.addEventListener("input", (e) => {
   }
 
   renderPokemons(filteredPokemons);
+}
+
+// Filtering
+inputEl.addEventListener("input", (e) => {
+  const currentInput = e.target.value.toLowerCase().trim();
+  renderFilterPokemons(currentInput);
 });
 
 // Add keyboard functionality
