@@ -18,6 +18,7 @@ function renderPokemons(list) {
     pokemonRow.appendChild(pokemon);
   });
 }
+// git commit -m "short message" -m "Long message"
 
 // Filtering
 inputEl.addEventListener("input", (e) => {
