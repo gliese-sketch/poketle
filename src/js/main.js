@@ -1,3 +1,5 @@
+import { shuffle } from "fast-shuffle";
+
 import data from "./data.json";
 import PokemonCard from "./components/PokemonCard";
 
@@ -10,16 +12,14 @@ function renderPokemons(list) {
   // Empty the previous content
   pokemonRow.innerHTML = "";
 
-  for (let obj of list) {
-    const { name, image, description, link } = obj;
+  list.forEach((pokemonObj) => {
+    const { name, image, description, link } = pokemonObj;
     const pokemon = PokemonCard(name, image, description, link);
     pokemonRow.appendChild(pokemon);
-  }
+  });
 }
 
-renderPokemons(data);
-
-// Filter Functionality
+// Filtering
 inputEl.addEventListener("input", (e) => {
   const currentInput = e.target.value.toLowerCase().trim();
 
@@ -27,13 +27,14 @@ inputEl.addEventListener("input", (e) => {
     obj.name.toLowerCase().includes(currentInput)
   );
 
-  if (filteredPokemons.length === 0) {
+  // Fallback Pokemon Card
+  if (!filteredPokemons.length) {
     renderPokemons([
       {
         name: "Not Found",
         image:
           "https://i.pinimg.com/originals/11/52/0c/11520cf1cc72ad1aab32fb3f26685619.jpg",
-        description: "Kuch aur type kariyo",
+        description: "Try a different search term",
         link: "https://pokemon.com",
       },
     ]);
@@ -42,15 +43,14 @@ inputEl.addEventListener("input", (e) => {
   }
 
   renderPokemons(filteredPokemons);
-
-  // current input mein jo likha hai
-  // vo kis kis pokemon ke name mein hai (filter that out)
-  // renderPokemons(filtered pokemons)
 });
 
-// === Add keyboard functionality
+// Add keyboard functionality
 document.addEventListener("keyup", (event) => {
   if (event.key === "/") {
     inputEl.focus();
   }
 });
+
+// Inital Rendering
+renderPokemons(shuffle(data));
