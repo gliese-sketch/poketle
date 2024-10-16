@@ -26,6 +26,10 @@ function renderFilterPokemons(input) {
   //   obj.name.toLowerCase().includes(input)
   // );
 
+  if (!input) {
+    return renderPokemons(data);
+  }
+
   const fuse = new Fuse(data, {
     keys: ["name"],
   });
