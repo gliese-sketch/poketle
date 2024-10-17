@@ -22,17 +22,17 @@ function renderPokemons(list) {
 
 // Filtering
 function renderFilterPokemons(input) {
-  // const filteredPokemons = data.filter((obj) =>
-  //   obj.name.toLowerCase().includes(input)
-  // );
-
   if (!input) {
     return renderPokemons(data);
   }
 
-  const fuse = new Fuse(data, {
-    keys: ["name"],
-  });
+  const options = {
+    keys: ["name", "abilities"],
+  };
+
+  const fuse = new Fuse(data, options);
+
+  console.log(fuse.search(input));
 
   const filteredPokemons = fuse.search(input).map((obj) => obj.item);
 
@@ -44,7 +44,6 @@ function renderFilterPokemons(input) {
         image:
           "https://i.pinimg.com/originals/11/52/0c/11520cf1cc72ad1aab32fb3f26685619.jpg",
         description: "Try a different search term",
-        link: "https://pokemon.com",
       },
     ]);
 
