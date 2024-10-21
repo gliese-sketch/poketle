@@ -28,17 +28,16 @@ function renderFilterPokemons(input) {
 
   const options = {
     keys: ["name", "abilities"],
+    threshold: 0.5,
   };
 
   const fuse = new Fuse(data, options);
-
-  console.log(fuse.search(input));
 
   const filteredPokemons = fuse.search(input).map((obj) => obj.item);
 
   // Fallback Pokemon Card
   if (!filteredPokemons.length) {
-    renderPokemons([
+    return renderPokemons([
       {
         name: "Not Found",
         image:
@@ -46,8 +45,6 @@ function renderFilterPokemons(input) {
         description: "Try a different search term",
       },
     ]);
-
-    return;
   }
 
   renderPokemons(filteredPokemons);
