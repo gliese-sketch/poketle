@@ -13,11 +13,15 @@ function renderPokemons(list) {
   // Empty the previous content
   pokemonRow.innerHTML = "";
 
+  const fragment = document.createDocumentFragment();
+
   list.forEach((pokemonObj) => {
     const { name, image, description, link } = pokemonObj;
     const pokemon = PokemonCard(name, image, description, link);
-    pokemonRow.appendChild(pokemon);
+    fragment.appendChild(pokemon);
   });
+
+  pokemonRow.appendChild(fragment);
 }
 
 // Filtering
