@@ -26,6 +26,7 @@ function renderPokemons(list) {
 
 // Filtering
 function renderFilterPokemons(input) {
+  console.log("Filtering in progress!");
   if (!input) {
     return renderPokemons(data);
   }
@@ -54,10 +55,15 @@ function renderFilterPokemons(input) {
   renderPokemons(filteredPokemons);
 }
 
-// Listen for input
+// Listen for input (Debounced!)
+let debounceTimer;
 inputEl.addEventListener("input", (e) => {
-  const currentInput = e.target.value.toLowerCase().trim();
-  renderFilterPokemons(currentInput);
+  clearTimeout(debounceTimer);
+
+  debounceTimer = setTimeout(() => {
+    const currentInput = e.target.value.toLowerCase().trim();
+    renderFilterPokemons(currentInput);
+  }, 300);
 });
 
 // Add keyboard functionality
